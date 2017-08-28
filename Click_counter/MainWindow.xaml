@@ -1,0 +1,157 @@
+﻿<Window x:Class="Click_counter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Click_counter"
+        mc:Ignorable="d"
+        Title="Click Counter" Height="405" Width="1010" MaxHeight="405" MaxWidth="1010" MinHeight="405" MinWidth="1010" Closing="Window_Closing">
+    <DockPanel>
+        <Menu VerticalAlignment="Top" DockPanel.Dock="Top">
+            <MenuItem 
+                x:Name="EvtListeningSwitch" 
+                Header="Listening"
+                IsCheckable="True"
+                IsChecked="False" Checked="EvtListeningSwitch_Checked" Unchecked="EvtListeningSwitch_Unchecked"/>
+            <MenuItem
+                x:Name="dailyCount"
+                Header="Show daily count"
+                IsCheckable="True"
+                IsChecked="False" Checked="dailyCount_Checked" Unchecked="dailyCount_Unchecked"/>
+        </Menu>
+        <Grid>
+            <Grid.Background>
+                <ImageBrush x:Name="KeyboardMouseImage" ImageSource="Assets/keyboard_mouse.png"/>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0"
+                   x:Name="MousePos" 
+                   HorizontalAlignment="Right" 
+                   Margin="0,0,30,50" 
+                   VerticalAlignment="Bottom"
+                   Content="" 
+                   Width="80"
+                   Foreground="DimGray"
+                   FontWeight="Bold"/>
+            <Label Grid.Row="0" x:Name="Escape" Content="0" HorizontalAlignment="Left" Margin="106,67,0,0" VerticalAlignment="Top" Width="25" Height="39" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="F1" Content="0" HorizontalAlignment="Left" Margin="163,81,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="F2" Content="0" HorizontalAlignment="Left" Margin="190,81,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="F3" Content="0" HorizontalAlignment="Left" Margin="217,81,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="F4" Content="0" HorizontalAlignment="Left" Margin="244,81,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="F5" Content="0" HorizontalAlignment="Left" Margin="287,81,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="F6" Content="0" HorizontalAlignment="Left" Margin="314,81,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="F7" Content="0" HorizontalAlignment="Left" Margin="341,81,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="F8" Content="0" HorizontalAlignment="Left" Margin="369,81,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="F9" Content="0" HorizontalAlignment="Left" Margin="410,81,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="F10" Content="0" HorizontalAlignment="Left" Margin="438,81,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="F11" Content="0" HorizontalAlignment="Left" Margin="466,81,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="F12" Content="0" HorizontalAlignment="Left" Margin="493,81,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="PrintScreen" Content="0" HorizontalAlignment="Left" Margin="530,81,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Scroll" Content="0" HorizontalAlignment="Left" Margin="557,81,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Pause" Content="0" HorizontalAlignment="Left" Margin="584,81,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="VolumeUp" Content="0" HorizontalAlignment="Left" Margin="738,67,0,0" VerticalAlignment="Top" Width="30" Height="20" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="VolumeDown" Content="0" HorizontalAlignment="Left" Margin="738,88,0,0" VerticalAlignment="Top" Width="30" Height="20" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Oemtilde" Content="0" HorizontalAlignment="Left" Margin="108,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="D1" Content="0" HorizontalAlignment="Left" Margin="135,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="D2" Content="0" HorizontalAlignment="Left" Margin="163,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="D3" Content="0" HorizontalAlignment="Left" Margin="190,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="D4" Content="0" HorizontalAlignment="Left" Margin="218,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="D5" Content="0" HorizontalAlignment="Left" Margin="245,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="D6" Content="0" HorizontalAlignment="Left" Margin="273,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="D7" Content="0" HorizontalAlignment="Left" Margin="301,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="D8" Content="0" HorizontalAlignment="Left" Margin="328,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="D9" Content="0" HorizontalAlignment="Left" Margin="356,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="D0" Content="0" HorizontalAlignment="Left" Margin="384,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="OemMinus" Content="0" HorizontalAlignment="Left" Margin="411,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Oemplus" Content="0" HorizontalAlignment="Left" Margin="438,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Back" Content="0" HorizontalAlignment="Left" Margin="466,116,0,0" VerticalAlignment="Top" Width="50" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Insert" Content="0" HorizontalAlignment="Left" Margin="530,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Home" Content="0" HorizontalAlignment="Left" Margin="557,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="PageUp" Content="0" HorizontalAlignment="Left" Margin="584,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="NumLock" Content="0" HorizontalAlignment="Left" Margin="620,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Divide" Content="0" HorizontalAlignment="Left" Margin="648,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Multiply" Content="0" HorizontalAlignment="Left" Margin="675,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Subtract" Content="0" HorizontalAlignment="Left" Margin="703,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="VolumeMute" Content="0" HorizontalAlignment="Left" Margin="738,116,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Tab" Content="0" HorizontalAlignment="Left" Margin="108,143,0,0" VerticalAlignment="Top" Width="37" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Q" Content="0" HorizontalAlignment="Left" Margin="149,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="W" Content="0" HorizontalAlignment="Left" Margin="177,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="E" Content="0" HorizontalAlignment="Left" Margin="204,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="R" Content="0" HorizontalAlignment="Left" Margin="232,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="T" Content="0" HorizontalAlignment="Left" Margin="259,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Y" Content="0" HorizontalAlignment="Left" Margin="287,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="U" Content="0" HorizontalAlignment="Left" Margin="314,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="I" Content="0" HorizontalAlignment="Left" Margin="342,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="O" Content="0" HorizontalAlignment="Left" Margin="369,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="P" Content="0" HorizontalAlignment="Left" Margin="397,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="OemOpenBrackets" Content="0" HorizontalAlignment="Left" Margin="425,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Oem6" Content="0" HorizontalAlignment="Left" Margin="452,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Oem5" Content="0" HorizontalAlignment="Left" Margin="479,143,0,0" VerticalAlignment="Top" Width="37" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Delete" Content="0" HorizontalAlignment="Left" Margin="530,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="End" Content="0" HorizontalAlignment="Left" Margin="557,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Next" Content="0" HorizontalAlignment="Left" Margin="584,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="NumPad7" Content="0" HorizontalAlignment="Left" Margin="620,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="NumPad8" Content="0" HorizontalAlignment="Left" Margin="648,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="NumPad9" Content="0" HorizontalAlignment="Left" Margin="675,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Add" Content="0" HorizontalAlignment="Left" Margin="703,143,0,0" VerticalAlignment="Top" Width="30" Height="53" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="MediaPreviousTrack" Content="0" HorizontalAlignment="Left" Margin="738,143,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Capital" Content="0" HorizontalAlignment="Left" Margin="108,171,0,0" VerticalAlignment="Top" Width="44" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="A" Content="0" HorizontalAlignment="Left" Margin="158,171,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="S" Content="0" HorizontalAlignment="Left" Margin="186,171,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="D" Content="0" HorizontalAlignment="Left" Margin="214,171,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="F" Content="0" HorizontalAlignment="Left" Margin="241,171,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="G" Content="0" HorizontalAlignment="Left" Margin="269,171,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="H" Content="0" HorizontalAlignment="Left" Margin="296,171,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="J" Content="0" HorizontalAlignment="Left" Margin="324,171,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="K" Content="0" HorizontalAlignment="Left" Margin="351,171,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="L" Content="0" HorizontalAlignment="Left" Margin="379,171,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Oem1" Content="0" HorizontalAlignment="Left" Margin="406,171,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Oem7" Content="0" HorizontalAlignment="Left" Margin="434,171,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Return" Content="0" HorizontalAlignment="Left" Margin="462,171,0,0" VerticalAlignment="Top" Width="54" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="NumPad4" Content="0" HorizontalAlignment="Left" Margin="620,171,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="NumPad5" Content="0" HorizontalAlignment="Left" Margin="648,171,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="NumPad6" Content="0" HorizontalAlignment="Left" Margin="675,171,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="MediaNextTrack" Content="0" HorizontalAlignment="Left" Margin="738,171,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="LShiftKey" Content="0" HorizontalAlignment="Left" Margin="108,198,0,0" VerticalAlignment="Top" Width="57" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Z" Content="0" HorizontalAlignment="Left" Margin="173,198,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="X" Content="0" HorizontalAlignment="Left" Margin="200,198,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="C" Content="0" HorizontalAlignment="Left" Margin="228,198,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="V" Content="0" HorizontalAlignment="Left" Margin="255,198,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="B" Content="0" HorizontalAlignment="Left" Margin="282,198,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="N" Content="0" HorizontalAlignment="Left" Margin="309,198,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="M" Content="0" HorizontalAlignment="Left" Margin="337,198,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Oemcomma" Content="0" HorizontalAlignment="Left" Margin="365,198,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="OemPeriod" Content="0" HorizontalAlignment="Left" Margin="393,198,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="OemQuestion" Content="0" HorizontalAlignment="Left" Margin="420,198,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="RShiftKey" Content="0" HorizontalAlignment="Left" Margin="448,198,0,0" VerticalAlignment="Top" Width="68" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Up" Content="0" HorizontalAlignment="Left" Margin="557,198,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="NumPad1" Content="0" HorizontalAlignment="Left" Margin="620,198,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="NumPad2" Content="0" HorizontalAlignment="Left" Margin="648,198,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="NumPad3" Content="0" HorizontalAlignment="Left" Margin="675,198,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="NumPadReturn" Content="0" HorizontalAlignment="Left" Margin="703,198,0,0" VerticalAlignment="Top" Width="30" Height="53" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="MediaPlayPause" Content="0" HorizontalAlignment="Left" Margin="738,198,0,0" VerticalAlignment="Top" Width="30" Height="53" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="LControlKey" Content="0" HorizontalAlignment="Left" Margin="108,226,0,0" VerticalAlignment="Top" Width="34" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="LWin" Content="0" HorizontalAlignment="Left" Margin="146,226,0,0" VerticalAlignment="Top" Width="36" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="LMenu" Content="0" HorizontalAlignment="Left" Margin="186,226,0,0" VerticalAlignment="Top" Width="36" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Space" Content="0" HorizontalAlignment="Left" Margin="227,226,0,0" VerticalAlignment="Top" Width="140" Height="25" FontSize="7" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="RMenu" Content="0" HorizontalAlignment="Left" Margin="375,226,0,0" VerticalAlignment="Top" Width="36" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" Content="" HorizontalAlignment="Left" Margin="416,226,0,0" VerticalAlignment="Top" Width="36" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Apps" Content="0" HorizontalAlignment="Left" Margin="456,226,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="RControlKey" Content="0" HorizontalAlignment="Left" Margin="483,226,0,0" VerticalAlignment="Top" Width="36" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Left" Content="0" HorizontalAlignment="Left" Margin="530,226,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Down" Content="0" HorizontalAlignment="Left" Margin="557,226,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Right" Content="0" HorizontalAlignment="Left" Margin="584,226,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="NumPad0" Content="0" HorizontalAlignment="Left" Margin="620,226,0,0" VerticalAlignment="Top" Width="51" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Decimal" Content="0" HorizontalAlignment="Left" Margin="675,226,0,0" VerticalAlignment="Top" Width="30" Height="25" FontSize="7" VerticalContentAlignment="Bottom" Foreground="AliceBlue"/>
+
+            <Label Grid.Row="0" x:Name="LMB" Content="0" HorizontalAlignment="Left" Margin="873,56,0,0" VerticalAlignment="Top" Width="40" Height="25" FontWeight="Bold" FontSize="8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="RMB" Content="0" HorizontalAlignment="Left" Margin="923,56,0,0" VerticalAlignment="Top" Width="40" Height="25" FontWeight="Bold" FontSize="8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="Middle" Content="0" HorizontalAlignment="Left" Margin="900,83,0,0" VerticalAlignment="Top" Width="40" Height="25" FontWeight="Bold" FontSize="8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="AliceBlue"/>
+            <Label Grid.Row="0" x:Name="XButton2" Content="0" HorizontalAlignment="Left" Margin="833,120,0,0" VerticalAlignment="Top" Width="40" Height="25" FontWeight="Bold" FontSize="8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="DimGray"/>
+            <Label Grid.Row="0" x:Name="XButton1" Content="0" HorizontalAlignment="Left" Margin="840,150,0,0" VerticalAlignment="Top" Width="40" Height="25" FontWeight="Bold" FontSize="8" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="DimGray"/>
+            <Label Grid.Row="0" x:Name="Clicks" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        </Grid>
+    </DockPanel>
+</Window>
