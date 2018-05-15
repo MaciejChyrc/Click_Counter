@@ -28,8 +28,6 @@ namespace Click_counter
 	/// <summary>
 	/// Logika interakcji dla klasy MainWindow.xaml
 	/// </summary>
-
-	//USTANDARYZOWAC NAZWY PLIKOW I ICH WYKORZYSTANIE
 	public partial class MainWindow : Window
 	{
 		private IKeyboardMouseEvents globalHook;
@@ -56,9 +54,9 @@ namespace Click_counter
 			FillKeyHoldLockDict();
 			appLaunchDate = DateTime.Now.ToShortDateString();
 			appLaunchTime = DateTime.Now.Hour + "-" + DateTime.Now.Minute;
-			ReadFileToDictionaries(appLaunchDate + ".txt", todayKeysClickCount, todayMouseClickCount);
-			CopyDictionaryKeys(todayMouseClickCount, mouseClickCount);
-			CopyDictionaryKeys(todayKeysClickCount, keysClickCount);
+			DataTransfer.ReadFileToDictionaries (appLaunchDate + ".txt", todayKeysClickCount, todayMouseClickCount);
+			DataTransfer.CopyDictionaryKeys (todayMouseClickCount, mouseClickCount);
+			DataTransfer.CopyDictionaryKeys (todayKeysClickCount, keysClickCount);
 			//Mouse position tracking is always on
 			globalHook.MouseMoveExt += (sender, e) =>
 			{
@@ -97,7 +95,7 @@ namespace Click_counter
 					todayMouseClickCount.Add (e.Button.ToString (), 1);
 				}
 			}
-			//dodac przelaczanie miedzy zwyklymi a dziennymi klikami
+			
 			if (!showTodayClicks)
 			{
 				if (e.Button == MouseButtons.Left)
@@ -110,6 +108,8 @@ namespace Click_counter
 					XButton1.Content = mouseClickCount[e.Button.ToString()];
 				else if (e.Button == MouseButtons.XButton2)
 					XButton2.Content = mouseClickCount[e.Button.ToString()];
+				//---
+				Clicks.Content = $"Clicked button: {e.Button}, number of clicks: {mouseClickCount[e.Button.ToString ()]}";
 			}
 			else
 			{
@@ -126,8 +126,6 @@ namespace Click_counter
 			}
 		}
 
-
-		//dodac przelaczenie miedzy zwyklymi a dziennymi klikami
 		private void GlobalHookKeyDown (object sender, System.Windows.Forms.KeyEventArgs e)
 		{
 			if (keysClickCount.ContainsKey(e.KeyCode.ToString()) && !keyHoldLock[e.KeyCode.ToString()])
@@ -145,13 +143,13 @@ namespace Click_counter
 					todayKeysClickCount.Add(e.KeyCode.ToString(), 1);
 				}
 			}
-			
-			//Clicks.Content = $"Wciśnięty klawisz: {e.KeyCode}, ilość dotychczasowych kliknięć: {keysClickCount[e.KeyCode.ToString()]}";
-			WpfLabel foundLabel = (WpfLabel) FindName(e.KeyCode.ToString());//
+			//---
+			Clicks.Content = $"Clicked button: {e.KeyCode}, number of clicks: {keysClickCount[e.KeyCode.ToString()]}";
+			WpfLabel foundLabel = (WpfLabel) FindName(e.KeyCode.ToString());
 
-			if (!showTodayClicks)
+			if (!showTodayClicks && foundLabel != null)
 				foundLabel.Content = keysClickCount[e.KeyCode.ToString()];
-			else
+			else if (showTodayClicks && foundLabel != null)
 				foundLabel.Content = todayKeysClickCount[e.KeyCode.ToString ()];
 
 			if (e.KeyCode == Keys.Return)
@@ -163,11 +161,6 @@ namespace Click_counter
 			keyHoldLock[e.KeyCode.ToString ()] = false;
 		}
 
-		private string GetWindowsUsername ()
-		{
-			return Environment.UserName;
-		}
-
 		private void Window_Closing (object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			UnsubscribeKeyboardMouseEvents();
@@ -175,17 +168,13 @@ namespace Click_counter
 			string currentTime = DateTime.Now.Hour + "-" + DateTime.Now.Minute;
 			string currentSessionLogFilename = appLaunchDate + "_" + appLaunchTime + "_to_" + currentDate + "_" + currentTime + ".txt";
 			string currentDayLogFilename = appLaunchDate + ".txt";
-			SaveLogs (currentSessionLogFilename, keysClickCount, mouseClickCount);
-			SaveLogs (currentDayLogFilename, todayKeysClickCount, todayMouseClickCount);
+			DataTransfer.SaveLogs (currentSessionLogFilename, keysClickCount, mouseClickCount);
+			DataTransfer.SaveLogs (currentDayLogFilename, todayKeysClickCount, todayMouseClickCount);
 		}
 
-		private void SaveLogs (string filename, Dictionary<string, int> keysDict, Dictionary<string, int> mouseDict)
+		/*private void SaveLogs (string filename, Dictionary<string, int> keysDict, Dictionary<string, int> mouseDict)
 		{
-			//string currentDate = DateTime.Now.ToShortDateString ();
-			//string currentTime = DateTime.Now.Hour + "-" + DateTime.Now.Minute;
 			string dir = AppDomain.CurrentDomain.BaseDirectory + "\\Logs\\";
-			//string filename = appLaunchDate + "_" + appLaunchTime + "_to_" + currentDate + "_" + currentTime + ".txt";
-			//string filename = currentDate + ".txt";
 
 			if (!Directory.Exists (dir))
 				Directory.CreateDirectory (dir);
@@ -206,13 +195,11 @@ namespace Click_counter
 				file.WriteLine (pairFormattedString);
 			}
 			file.Close ();
-		}
+		}*/
 
-		private void ReadFileToDictionaries (string filename, Dictionary<string, int> keysDict, Dictionary<string, int> mouseDict)
+		/*private void ReadFileToDictionaries (string filename, Dictionary<string, int> keysDict, Dictionary<string, int> mouseDict)
 		{
-			//string currentDate = DateTime.Now.ToShortDateString ();
 			string dir = AppDomain.CurrentDomain.BaseDirectory + "\\Logs\\";
-			//string filename = currentDate + ".txt";
 
 			if (File.Exists (dir + filename))
 			{
@@ -242,16 +229,8 @@ namespace Click_counter
 							keysDict.Add (keyVal[0], int.Parse (keyVal[1]));
 					}
 				}
-				/*foreach (KeyValuePair<string, int> pair in todayMouseClickCount)
-				{
-					Clicks.Content += pair.Key + pair.Value + "\n";
-				}
-				foreach (KeyValuePair<string, int> pair in todayKeysClickCount)
-				{
-					Clicks.Content += pair.Key + pair.Value + "\n";
-				}*/
 			}
-		}
+		}*/
 
 		private void FillKeyHoldLockDict ()
 		{
@@ -262,14 +241,14 @@ namespace Click_counter
 			}
 		}
 
-		private void CopyDictionaryKeys (Dictionary<string, int> from, Dictionary<string, int> to)
+		/*private void CopyDictionaryKeys (Dictionary<string, int> from, Dictionary<string, int> to)
 		{
 			foreach (KeyValuePair<string, int> pair in from)
 			{
 				if (!to.ContainsKey(pair.Key))
 					to.Add(pair.Key, 0);
 			}
-		}
+		}*/
 
 		private void EvtListeningSwitch_Checked (object sender, RoutedEventArgs e)
 		{
@@ -294,143 +273,6 @@ namespace Click_counter
 			
 			SwitchUiLabels (false);			
 		}
-
-		/*private void SwitchUiLabels (bool daily)
-		{
-			WpfLabel foundLabel;
-			UpdateLabel update;
-
-			if (!daily)
-			{
-				foreach (KeyValuePair<string, int> pair in mouseClickCount)
-				{
-					if (pair.Key == "Left")
-					{
-						foundLabel = (WpfLabel) FindName ("LMB");
-						if (foundLabel != null)
-						{
-							//foundLabel.Content = pair.Value;
-							update = () => foundLabel.Content = pair.Value;
-							Action action = (() =>
-							{
-								foundLabel.Dispatcher.Invoke (update);
-							});
-							action.BeginInvoke (null, null);
-						}
-					}
-					else if (pair.Key == "Right")
-					{
-						foundLabel = (WpfLabel) FindName ("RMB");
-						if (foundLabel != null)
-						{
-							//foundLabel.Content = pair.Value;
-							update = () => foundLabel.Content = pair.Value;
-							Action action = (() =>
-							{
-								foundLabel.Dispatcher.Invoke (update);
-							});
-							action.BeginInvoke (null, null);
-						}
-					}
-					else
-					{
-						foundLabel = (WpfLabel) FindName (pair.Key);
-						if (foundLabel != null)
-						{
-							//foundLabel.Content = pair.Value;
-							update = () => foundLabel.Content = pair.Value;
-							Action action = (() =>
-							{
-								foundLabel.Dispatcher.Invoke (update);
-							});
-							action.BeginInvoke (null, null);
-						}
-					}
-				}
-				foreach (KeyValuePair<string, int> pair in keysClickCount)
-				{
-					foundLabel = (WpfLabel) FindName (pair.Key);
-					if (foundLabel != null)
-					{
-						//foundLabel.Content = pair.Value;
-						update = () => foundLabel.Content = pair.Value;
-						Action action = (() =>
-						{
-							foundLabel.Dispatcher.Invoke (update);
-						});
-						action.BeginInvoke (null, null);
-					}
-				}
-			}
-			else
-			{
-				foreach (KeyValuePair<string, int> pair in todayMouseClickCount)
-				{
-					if (pair.Key == "Left")
-					{
-						foundLabel = (WpfLabel) FindName ("LMB");
-						if (foundLabel != null)
-						{
-							//foundLabel.Content = pair.Value;
-							update = () => foundLabel.Content = pair.Value;
-							Action action = (() =>
-							{
-								foundLabel.Dispatcher.Invoke (update);
-							});
-							action.BeginInvoke (null, null);
-						}
-					}
-					else if (pair.Key == "Right")
-					{
-						foundLabel = (WpfLabel) FindName ("RMB");
-						if (foundLabel != null)
-						{
-							//foundLabel.Content = pair.Value;
-							update = () => foundLabel.Content = pair.Value;
-							Action action = (() =>
-							{
-								foundLabel.Dispatcher.Invoke (update);
-							});
-							action.BeginInvoke (null, null);
-						}
-					}
-					else
-					{
-						foundLabel = (WpfLabel) FindName (pair.Key);
-						if (foundLabel != null)
-						{
-							//foundLabel.Content = pair.Value;
-							update = () => foundLabel.Content = pair.Value;
-							Action action = (() =>
-							{
-								foundLabel.Dispatcher.Invoke (update);
-							});
-							action.BeginInvoke (null, null);
-						}
-					}
-				}
-				foreach (KeyValuePair<string, int> pair in todayKeysClickCount)
-				{
-					foundLabel = (WpfLabel) FindName (pair.Key);
-					if (foundLabel != null)
-					{
-						//foundLabel.Content = pair.Value;
-						update = () => foundLabel.Content = pair.Value;
-						Action action = (() =>
-						{
-							foundLabel.Dispatcher.Invoke (update);
-						});
-						action.BeginInvoke (null, null);
-						//DispatcherFrame frame = new DispatcherFrame ();
-						//Dispatcher.BeginInvoke (DispatcherPriority.Background, (SendOrPostCallback) delegate
-						//{
-						//	foundLabel.Content = pair.Value;
-						//}, frame);
-						//Dispatcher.PushFrame (frame);
-					}
-				}
-			}
-		}*/
 
 		private void SwitchUiLabels (bool daily)
 		{
@@ -520,8 +362,6 @@ namespace Click_counter
 			}
 		}
 
-		private Action UpdateLabel = delegate {  };
-
 		private List<WpfLabel> GetLabelList ()
 		{
 			List<WpfLabel> temp = new List<WpfLabel>();
@@ -552,49 +392,6 @@ namespace Click_counter
 			label.Dispatcher.Invoke(DispatcherPriority.Render, UpdateLabel);
 		}
 
-		/*public static T FindChild<T> (DependencyObject parent, string childName) where T : DependencyObject
-		{
-			// Confirm parent and childName are valid. 
-			if (parent == null)
-				return null;
-
-			T foundChild = null;
-
-			int childrenCount = VisualTreeHelper.GetChildrenCount (parent);
-			for (int i = 0; i < childrenCount; i++)
-			{
-				var child = VisualTreeHelper.GetChild (parent, i);
-				// If the child is not of the request child type child
-				T childType = child as T;
-				if (childType == null)
-				{
-					// recursively drill down the tree
-					foundChild = FindChild<T> (child, childName);
-
-					// If the child is found, break so we do not overwrite the found child. 
-					if (foundChild != null)
-						break;
-				}
-				else if (!string.IsNullOrEmpty (childName))
-				{
-					var frameworkElement = child as FrameworkElement;
-					// If the child's name is set for search
-					if (frameworkElement != null && frameworkElement.Name == childName)
-					{
-						// if the child's name is of the request name
-						foundChild = (T) child;
-						break;
-					}
-				}
-				else
-				{
-					// child element found.
-					foundChild = (T) child;
-					break;
-				}
-			}
-
-			return foundChild;
-		}*/
+		private Action UpdateLabel = delegate { };
 	}
 }
